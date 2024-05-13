@@ -5,7 +5,7 @@ const app = express();
 app.use(express.static(__dirname));
 
 app.get('/favicon.ico', (req, res) => {
-    res.sendFile(path.join(__dirname, 'imgs/setup/favicon.ico'));
+    res.sendFile(path.join(__dirname, 'sources/setup/favicon.ico'));
 });
 
 app.listen(8080, () => {

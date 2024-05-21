@@ -6,7 +6,7 @@ from PyQt6.QtGui import QIcon, QAction
 
 from pages.user_settings import UserSettingsPage
 from pages.logs import LogsPage
-from pages.managedb import ManagedbPage
+from pages.manage_db import ManagedbPage
 from pages.reminders import RemindersPage
 from pages.home import HomePage
 

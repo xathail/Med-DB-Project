@@ -7852,6 +7852,55 @@ a.anchor-link {
 <img alt="user-settings" src="sources/testing/imgs/managedb/managedb_rename.png" width="600"/>
 <img alt="user-settings" src="sources/testing/imgs/managedb/managedb_deleteconfirm.png" width="600"/>
 <img alt="user-settings" src="sources/testing/imgs/managedb/managedb_delete.png" width="600"/>
+<p>All of this works as expected:</p>
+<ul>
+<li>For the creation, if it already exists, it raises an error, otherwise it creates the database with the required tables.</li>
+<li>For the rename, if the user doesn't include .db in the new name, it is auto added, otherwise it stays the same.</li>
+<li>For deleting the database, they have to retype the database name to prevent any accidents.</li>
+</ul>
+<h3 id="Home-Page"><u><strong>Home Page</strong></u><a class="anchor-link" href="#Home-Page">¶</a></h3><img alt="user-settings" src="sources/testing/imgs/home/home_lower.png" width="600"/>
+<img alt="user-settings" src="sources/testing/imgs/home/home_adduser.png" width="600"/>
+<img alt="user-settings" src="sources/testing/imgs/home/home_addmed.png" width="600"/>
+<img alt="user-settings" src="sources/testing/imgs/home/home_addreminderactive.png" width="600"/>
+<img alt="user-settings" src="sources/testing/imgs/home/home_addreminderinactive.png" width="600"/>
+<img alt="user-settings" src="sources/testing/imgs/home/home_addreminderissue.png" width="600"/>
+<p>Most of this works as expected:</p>
+<ul>
+<li>You cannot have any non-natural number inputs where they wouldn't be expected</li>
+<li>Adding users and medicine works as expected</li>
+<li>Reminder creation works mostly as expected</li>
+<li>An issue arises where the user attempts to create a reminder with userIDs / medIDs that don't exist in the database but this would be an easy search fix.</li>
+</ul>
+<h3 id="Reminders"><u><strong>Reminders</strong></u><a class="anchor-link" href="#Reminders">¶</a></h3><img alt="user-settings" src="sources/testing/imgs/reminders/reminders_infoactive.png" width="600"/>
+<img alt="user-settings" src="sources/testing/imgs/reminders/reminders_infoinactive.png" width="600"/>
+<p>All of this works as expected:</p>
+<ul>
+<li>If the reminder was marked as active on creation, it is displayed.</li>
+<li>If it wasn't, it isn't.</li>
+</ul>
+<h3 id="Logs"><u><strong>Logs</strong></u><a class="anchor-link" href="#Logs">¶</a></h3><img alt="user-settings" src="sources/testing/imgs/logs/logs_info.png" width="600"/>
+<img alt="user-settings" src="sources/testing/imgs/logs/logs_exportcsv.png" width="600"/>
+<img alt="user-settings" src="sources/testing/imgs/logs/logs_exportjson.png" width="600"/>
+<img alt="user-settings" src="sources/testing/imgs/logs/logs_exportxlsx.png" width="600"/>
+<p>All of this works as expected:</p>
+<ul>
+<li>If reminders have been created, they are displayed in the scrollable box.</li>
+<li>You can successfully export to csv, json, and xlsx.</li>
+</ul>
+<h3 id="Other"><u><strong>Other</strong></u><a class="anchor-link" href="#Other">¶</a></h3><img alt="user-settings" src="sources/testing/imgs/other/csv_proof.png" width="600"/>
+<img alt="user-settings" src="sources/testing/imgs/other/json_proof.png" width="600"/>
+<img alt="user-settings" src="sources/testing/imgs/other/xlsx_proof.png" width="600"/>
+<p>All of this works as expected:</p>
+<ul>
+<li>Valid .csv, .json, .xlsx, files can be exported to be worked with.</li>
+</ul>
+<h3 id="%5BUnfinished%5D-User-Settings"><u><strong>[Unfinished] User Settings</strong></u><a class="anchor-link" href="#%5BUnfinished%5D-User-Settings">¶</a></h3><img alt="user-settings" src="sources/testing/imgs/usersettings/usersettings_page.png" width="600"/>
+<img alt="user-settings" src="sources/testing/imgs/usersettings/usersettings_censor.png" width="600"/>
+<p>This partly works as expected:</p>
+<ul>
+<li>It is all created UI wise to work with.</li>
+<li>Passwords entered are censored unless the reveal button is used, this auto re-reveals if they click on a different box.</li>
+</ul>
 </div>
 </div>
 </div>

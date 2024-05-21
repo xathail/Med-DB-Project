@@ -7854,6 +7854,15 @@ a.anchor-link {
         <span class="n">conn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">db_location</span><span class="p">)</span>
         <span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
 
+        <span class="c1"># Check if the reminders table exists</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">"""</span>
+<span class="s2">            SELECT name FROM sqlite_master WHERE type='table' AND name='reminders';</span>
+<span class="s2">        """</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchone</span><span class="p">()</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="c1"># The reminders table does not exist, so return without loading data</span>
+            <span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+            <span class="k">return</span>
+
         <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">"""</span>
 <span class="s2">            SELECT r.id, p.name, m.name, r.reminder_time, r.active</span>
 <span class="s2">            FROM reminders r</span>
@@ -8145,49 +8154,29 @@ a.anchor-link {
         <span class="bp">self</span><span class="o">.</span><span class="n">reminders_export_json</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">export_data</span><span class="p">(</span><span class="s1">'reminders'</span><span class="p">,</span> <span class="s1">'json'</span><span class="p">))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">reminders_export_xlsx</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">export_data</span><span class="p">(</span><span class="s1">'reminders'</span><span class="p">,</span> <span class="s1">'xlsx'</span><span class="p">))</span>
 
-
-
-        <span class="c1"># Admin logs section</span>
-<span class="w">        </span><span class="sd">"""</span>
-<span class="sd">        self.admin_logs_label = QLabel("Admin logs")</span>
-<span class="sd">        self.admin_logs_label.setFont(QFont('Arial', 12))</span>
-<span class="sd">        self.admin_logs_box = QTextEdit()</span>
-<span class="sd">        self.admin_logs_box.setReadOnly(True)</span>
-<span class="sd">        self.admin_logs_box.setFrameShape(QFrame.Shape.StyledPanel)</span>
-<span class="sd">        self.admin_logs_box.setFrameShadow(QFrame.Shadow.Sunken)</span>
-<span class="sd">        self.admin_logs_box.setLineWidth(2)</span>
-<span class="sd">        self.admin_logs_box.setMidLineWidth(3)</span>
-<span class="sd">        self.admin_logs_box.setContentsMargins(6, 6, 6, 6)  # Set the margins to create the rounded corners</span>
-
-<span class="sd">        # Export buttons for admin logs</span>
-<span class="sd">        self.admin_logs_export_layout = QHBoxLayout()</span>
-<span class="sd">        self.admin_logs_export_csv = QPushButton("Export as .csv")</span>
-<span class="sd">        self.admin_logs_export_json = QPushButton("Export as .json")</span>
-<span class="sd">        self.admin_logs_export_xlsx = QPushButton("Export as .xlsx")</span>
-<span class="sd">        self.admin_logs_export_layout.addWidget(self.admin_logs_export_csv)</span>
-<span class="sd">        self.admin_logs_export_layout.addWidget(self.admin_logs_export_json)</span>
-<span class="sd">        self.admin_logs_export_layout.addWidget(self.admin_logs_export_xlsx)</span>
-
-<span class="sd">        # Connect export buttons to their respective methods</span>
-<span class="sd">        self.admin_logs_export_csv.clicked.connect(lambda: self.export_data('admin_logs', 'csv'))</span>
-<span class="sd">        self.admin_logs_export_json.clicked.connect(lambda: self.export_data('admin_logs', 'json'))</span>
-<span class="sd">        self.admin_logs_export_xlsx.clicked.connect(lambda: self.export_data('admin_logs', 'xlsx'))</span>
-<span class="sd">        """</span>
-
         <span class="c1"># Add widgets to the main layout</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">reminders_label</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">reminders_box</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">addLayout</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">reminders_export_layout</span><span class="p">)</span>
-<span class="w">        </span><span class="sd">"""</span>
-<span class="sd">        self.layout.addWidget(self.admin_logs_label)</span>
-<span class="sd">        self.layout.addWidget(self.admin_logs_box)</span>
-<span class="sd">        self.layout.addLayout(self.admin_logs_export_layout)</span>
-<span class="sd">        """</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">refresh_button</span> <span class="o">=</span> <span class="n">QPushButton</span><span class="p">(</span><span class="s2">"Refresh"</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">refresh_button</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">load_logs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">refresh_button</span><span class="p">)</span>
+
         <span class="bp">self</span><span class="o">.</span><span class="n">setLayout</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">layout</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">load_logs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">conn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">db_location</span><span class="p">)</span>
         <span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+
+        <span class="c1"># Check if the log table exists</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">"""</span>
+<span class="s2">            SELECT name FROM sqlite_master WHERE type='table' AND name='log';</span>
+<span class="s2">        """</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchone</span><span class="p">()</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="c1"># The log table does not exist, so return without loading data</span>
+            <span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+            <span class="k">return</span>
 
         <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">"""</span>
 <span class="s2">            SELECT l.id, p.name, m.name, l.action, l.timestamp</span>
@@ -8197,6 +8186,9 @@ a.anchor-link {
 <span class="s2">            JOIN medications m ON r.medication_id = m.id</span>
 <span class="s2">        """</span><span class="p">)</span>
         <span class="n">logs</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+
+        <span class="c1"># Clear the reminders_box before appending new logs</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">reminders_box</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
 
         <span class="k">for</span> <span class="n">log_id</span><span class="p">,</span> <span class="n">person</span><span class="p">,</span> <span class="n">medication</span><span class="p">,</span> <span class="n">action</span><span class="p">,</span> <span class="n">timestamp</span> <span class="ow">in</span> <span class="n">logs</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">reminders_box</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">"ID: </span><span class="si">{</span><span class="n">log_id</span><span class="si">}</span><span class="s2">, Person: </span><span class="si">{</span><span class="n">person</span><span class="si">}</span><span class="s2">, Medication: </span><span class="si">{</span><span class="n">medication</span><span class="si">}</span><span class="s2">, Action: </span><span class="si">{</span><span class="n">action</span><span class="si">}</span><span class="s2">, Timestamp: </span><span class="si">{</span><span class="n">timestamp</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>

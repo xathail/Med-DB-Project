@@ -51,3 +51,4 @@ class UserSettingsPage(QWidget):
         self.layout.addWidget(self.confirm_password)
         self.layout.addWidget(self.change_password_btn)
         self.setLayout(self.layout)
+

@@ -30,6 +30,15 @@ class RemindersPage(QWidget):
         conn = sqlite3.connect(self.db_location)
         cursor = conn.cursor()
 
+        # Check if the reminders table exists
+        cursor.execute("""
+            SELECT name FROM sqlite_master WHERE type='table' AND name='reminders';
+        """)
+        if cursor.fetchone() is None:
+            # The reminders table does not exist, so return without loading data
+            conn.close()
+            return
+
         cursor.execute("""
             SELECT r.id, p.name, m.name, r.reminder_time, r.active
             FROM reminders r

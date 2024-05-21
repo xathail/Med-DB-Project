@@ -142,3 +142,4 @@ class HomePage(QWidget):
         except sqlite3.OperationalError:
             # Error message
             QMessageBox.critical(self, "Refresh Database", "Failed to refresh the database. Please check the database file.")
+

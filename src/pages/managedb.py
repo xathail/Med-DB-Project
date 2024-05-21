@@ -154,3 +154,4 @@ class ManagedbPage(QWidget):
                 json.dump(data, f, indent=4)
                 f.truncate()
                 QMessageBox.information(self, "Success", f"Successfully renamed {old_name} to {new_name}.")
+

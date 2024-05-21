@@ -40,49 +40,29 @@ class LogsPage(QWidget):
         self.reminders_export_json.clicked.connect(lambda: self.export_data('reminders', 'json'))
         self.reminders_export_xlsx.clicked.connect(lambda: self.export_data('reminders', 'xlsx'))
 
-
-
-        # Admin logs section
-        """
-        self.admin_logs_label = QLabel("Admin logs")
-        self.admin_logs_label.setFont(QFont('Arial', 12))
-        self.admin_logs_box = QTextEdit()
-        self.admin_logs_box.setReadOnly(True)
-        self.admin_logs_box.setFrameShape(QFrame.Shape.StyledPanel)
-        self.admin_logs_box.setFrameShadow(QFrame.Shadow.Sunken)
-        self.admin_logs_box.setLineWidth(2)
-        self.admin_logs_box.setMidLineWidth(3)
-        self.admin_logs_box.setContentsMargins(6, 6, 6, 6)  # Set the margins to create the rounded corners
-
-        # Export buttons for admin logs
-        self.admin_logs_export_layout = QHBoxLayout()
-        self.admin_logs_export_csv = QPushButton("Export as .csv")
-        self.admin_logs_export_json = QPushButton("Export as .json")
-        self.admin_logs_export_xlsx = QPushButton("Export as .xlsx")
-        self.admin_logs_export_layout.addWidget(self.admin_logs_export_csv)
-        self.admin_logs_export_layout.addWidget(self.admin_logs_export_json)
-        self.admin_logs_export_layout.addWidget(self.admin_logs_export_xlsx)
-
-        # Connect export buttons to their respective methods
-        self.admin_logs_export_csv.clicked.connect(lambda: self.export_data('admin_logs', 'csv'))
-        self.admin_logs_export_json.clicked.connect(lambda: self.export_data('admin_logs', 'json'))
-        self.admin_logs_export_xlsx.clicked.connect(lambda: self.export_data('admin_logs', 'xlsx'))
-        """
-
         # Add widgets to the main layout
         self.layout.addWidget(self.reminders_label)
         self.layout.addWidget(self.reminders_box)
         self.layout.addLayout(self.reminders_export_layout)
-        """
-        self.layout.addWidget(self.admin_logs_label)
-        self.layout.addWidget(self.admin_logs_box)
-        self.layout.addLayout(self.admin_logs_export_layout)
-        """
+
+        self.refresh_button = QPushButton("Refresh")
+        self.refresh_button.clicked.connect(self.load_logs)
+        self.layout.addWidget(self.refresh_button)
+
         self.setLayout(self.layout)
 
     def load_logs(self):
         conn = sqlite3.connect(self.db_location)
         cursor = conn.cursor()
+
+        # Check if the log table exists
+        cursor.execute("""
+            SELECT name FROM sqlite_master WHERE type='table' AND name='log';
+        """)
+        if cursor.fetchone() is None:
+            # The log table does not exist, so return without loading data
+            conn.close()
+            return
 
         cursor.execute("""
             SELECT l.id, p.name, m.name, l.action, l.timestamp
@@ -92,6 +72,9 @@ class LogsPage(QWidget):
             JOIN medications m ON r.medication_id = m.id
         """)
         logs = cursor.fetchall()
+
+        # Clear the reminders_box before appending new logs
+        self.reminders_box.clear()
 
         for log_id, person, medication, action, timestamp in logs:
             self.reminders_box.append(f"ID: {log_id}, Person: {person}, Medication: {medication}, Action: {action}, Timestamp: {timestamp}")
@@ -116,3 +99,4 @@ class LogsPage(QWidget):
                 QMessageBox.information(self, "Success", f"{table_name} successfully exported as {file_format}.")
             else:
                 QMessageBox.warning(self, "Failed", "Database does not exist.")
+

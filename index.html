@@ -7557,6 +7557,16 @@ a.anchor-link {
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h1 id="Contents"><strong><u>Contents</u></strong><a class="anchor-link" href="#Contents">¶</a></h1><div id="toc"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h1 id="Analysis"><strong><u>Analysis</u></strong><a class="anchor-link" href="#Analysis">¶</a></h1><h3 id="Overview"><strong><u>Overview</u></strong><a class="anchor-link" href="#Overview">¶</a></h3><ul>
 <li>In a large family home or a small nursing home, managing the administration of medicines can be a complex task. With multiple individuals, each possibly requiring different medicines at different intervals, it becomes crucial to have a system in place that ensures safe and timely administration of doses. This is particularly important considering that each medicine has a required minimal interval between doses, a maximum dose per day, and age appropriateness.<ul>
 <li>To address this challenge, we propose the creation of a medical logging database. This database will serve as a central repository of information about the individuals in the household or nursing home, the medicines they are taking, and a log of administered doses.</li>
@@ -7715,6 +7725,16 @@ a.anchor-link {
 </ul>
 </li>
 </ol>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h1 id="Documented-Design"><strong><u>Documented Design</u></strong><a class="anchor-link" href="#Documented-Design">¶</a></h1><h3 id="Example-UI-Implementation"><strong>Example UI Implementation</strong><a class="anchor-link" href="#Example-UI-Implementation">¶</a></h3><p>The main goals of our User Interface (UI) are:</p>
 <ol>
 <li><p><strong>Usability</strong>: The UI should be intuitive and easy to navigate. Even first-time users should be able to understand how to interact with the application without extensive instructions.</p>
@@ -7729,11 +7749,17 @@ a.anchor-link {
 <p>Here are some potential pages of a design that fulfills these features:</p>
 <h3 id="Navigation"><strong>Navigation</strong><a class="anchor-link" href="#Navigation">¶</a></h3><p>With a navbar that's just a hamburger away, it allows for quick navigation for all users, helping them find exactly what is needed in a much more categorised way.</p>
 <img alt="navbar" src="sources/design/imgs/navbar.png" width="600"/>
+<p>A more improved website version rather than a more PyUI focused one could look like this:</p>
+<img alt="navbar" src="sources/design/imgs/navbar-v2.png" width="600"/>
 <h3 id="Logs"><strong>Logs</strong><a class="anchor-link" href="#Logs">¶</a></h3><p>Keeping logs is vital, especially if managing a nursing home. With these, it'll be much easier to find any unauthorised access attempts, as well as create a rollback point in the unlikely event of database issues.</p>
 <img alt="logs" src="sources/design/imgs/logs.png" width="600"/>
+<p>The same for the navigation design, a more website-friendly design could be like:</p>
+<img alt="logs" src="sources/design/imgs/logs-v2.png" width="600"/>
 <h3 id="User-Settings"><strong>User Settings</strong><a class="anchor-link" href="#User-Settings">¶</a></h3><p>Having a dedicated user settings page will allow for quick changes to a system, something particularly useful for if sharing access with others on a network.</p>
 <img alt="user-settings" src="sources/design/imgs/user_settings.png" width="600"/>
-<h3 id="Hierarchy-Chart">Hierarchy Chart<a class="anchor-link" href="#Hierarchy-Chart">¶</a></h3><p><strong>To create a hierarchy chart visualisation for the design, I wrote up some code that would take in an input file of an easily understandable config, convert that to something that is easier to work with code-wise, and then create a graphic visualisation of this.</strong></p>
+<p>As with the other designs, it could look more like:</p>
+<img alt="user-settings" src="sources/design/imgs/user_settings-v2.png" width="600"/>
+<h3 id="Hierarchy-Chart"><strong>Hierarchy Chart</strong><a class="anchor-link" href="#Hierarchy-Chart">¶</a></h3><p><strong>To create a hierarchy chart visualisation for the design, I wrote up some code that would take in an input file of an easily understandable config, convert that to something that is easier to work with code-wise, and then create a graphic visualisation of this.</strong></p>
 <p><strong>Python File:</strong></p>
 <div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">graphviz</span>
 
@@ -7801,7 +7827,28 @@ a.anchor-link {
 <p>See <a href="/sources/design/hierarchy/hierarchy.html" target="_blank">Full File</a></p>
 <p><strong>Hierarchy Chart Output:</strong></p>
 <img alt="hierarchy" src="/sources/design/imgs/hierarchy_chart.png" width="900"/>
-<h1 id="Technical-Solution">Technical Solution<a class="anchor-link" href="#Technical-Solution">¶</a></h1><p>See <a href="/sources/technical/python/main.html" target="_blank">Full File</a></p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h1 id="Technical-Solution"><strong><u>Technical Solution</u></strong><a class="anchor-link" href="#Technical-Solution">¶</a></h1><p>See <a href="/sources/technical/python/main.html" target="_blank">Full File</a></p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h1 id="Testing"><strong><u>Testing</u></strong><a class="anchor-link" href="#Testing">¶</a></h1>
 </div>
 </div>
 </div>
